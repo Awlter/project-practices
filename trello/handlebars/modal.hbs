@@ -1,0 +1,162 @@
+<div id="modal-layer"></div>
+<div id="card-modal">
+  <div class="modal-header">
+    <span class="modal-icon"></span>
+    <textarea class="modal-title">{{title}}</textarea>
+    <div class="modal-header-content">
+      <p>in list <a href="#">{{listTitle}}</a></p>
+    </div>
+  </div>
+  <div class="modal-main">
+    <div class="modal-detail">
+      {{#if labels.length}}
+        <div class="modal-labels">
+          <h3>Labels</h3>
+          <ul>
+            {{#each labels}}
+              <li><img src="/images/{{this}}.png"></li>
+            {{/each}}
+          </ul>
+        </div>
+      {{else}}
+        <div class="modal-labels" style="display: none">
+          <h3>Labels</h3>
+          <ul>
+          </ul>
+        </div>
+      {{/if}}
+      {{#if dueDate}}
+        <div class="modal-dueDate">
+          <h3>Due Date</h3>
+          <p>{{dueDate}}</p>
+        </div>
+      {{else}}
+        <div class="modal-dueDate" style="display: none">
+          <h3>Due Date</h3>
+          <p>{{dueDate}}</p>
+        </div>
+      {{/if}}
+      <div class="modal-description">
+        {{#if description.length}}
+          <div class="description-show">
+            <h3>Description</h3>
+            <a class="edit-description" href="#">Edit</a>
+            <p>{{description}}</p>
+          </div>
+          <a style="display: none;" class="add-description" href="#">Edit the description…</a>
+        {{else}}
+          <div style="display: none;" class="description-show">
+            <h3>Description</h3>
+            <a class="edit-description" href="#">Edit</a>
+            <p>{{description}}</p>
+          </div>
+          <a class="add-description" href="#">Edit the description…</a>
+        {{/if}}
+        <div class="description-control-section">
+          <textarea class="new-card-title description-input" placeholder="Add more detailed descriptions"></textarea>
+          <input class="submit-button" type="submit" value="Save">
+          <a class="icon-cross" href="#"></a>
+        </div>
+      </div>
+    </div>
+    <div class="modal-comments">
+      <span class="modal-comment-icon"></span>
+      <h3>Comments</h3>
+      <textarea></textarea>
+      <input class="submit-button" type="submit" value="Save">
+    </div>
+    <div class="modal-activities">
+      <span class="modal-activities-icon"></span>
+      <h3>Activities</h3>
+      <div class="activity-list">
+      {{#each comments}}
+        <p>{{this}}</p>
+      {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="modal-sidebar">
+    <div class="modal-add">
+      <h2>Add</h2>
+      <ul>
+        <li class="labels">
+          <h3>Labels</h3>
+        </li>
+        <div class="show-labels">
+          <h4>Labels</h4>
+          <a href="#" id="yellow">
+            <img src="/images/yellow.png">
+          </a>
+          <a href="#" id="orange">
+            <img src="/images/orange.png">
+          </a>
+          <a href="#" id="red">
+            <img src="/images/red.png">
+          </a>
+        </div>
+        <li class="show-dueDate">
+          <h3>Due Date</h3>
+        </li>
+        <div id="date-picker" style="display: none">
+          <h4>Change Due Date</h4>
+          <dl>
+            <dt><label for="date">Date</label></dt>
+            <dd><input type="text" name="date" id="date"></dd>
+          </dl>
+          <dl>
+            <dt><label for="time">Time</label></dt>
+            <dd><input type="text" name="time" id="time"></dd>
+          </dl>
+          <div class="picker-console">
+          <input class="submit-button" type="submit" value="Save">
+          <input class="submit-button" type="submit" value="Remove">
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="modal-actions">
+      <h2>Actions</h2>
+      <ul>
+        <li class="action-move">Move</li>
+        <div class="modal-move" style="display:none">
+          <h4>Move card</h4>
+          <dl>
+            <dt><label for="listMoved">List</label></dt>
+            <dd><input type="number" name="listMoved" id="listMoved"></dd>
+          </dl>
+          <dl>
+            <dt><label for="positionMoved">Position</label></dt>
+            <dd><input type="number" name="positionMoved" id="positionMoved"></dd>
+          </dl>
+          <input type="submit" class="submit-button" value="Move">
+        </div>
+        <li class="action-copy">Copy</li>
+        <div class="modal-copy" style="display: none;">
+          <h4>Copy card</h4>
+          <dl>
+            <dt><label for="newTitle">Title</label></dt>
+            <dd><input type="text" name="newTitle" id="newTitle"></dd>
+          </dl>
+          <h5>Copy to ..</h5>
+          <dl>
+            <dt><label for="listCopy">List</label></dt>
+            <dd><input type="number" name="listCopy" id="listCopy"></dd>
+          </dl>
+          <dl>
+            <dt><label for="positionCopy">Position</label></dt>
+            <dd><input type="number" name="positionCopy" id="positionCopy"></dd>
+          </dl>
+          <input type="submit" class="submit-button" value="Copy">
+        </div>
+        <li class="action-subscribe">Subscribe
+          {{#if subscribed}}
+          <span class="on">On</span>
+          {{else}}
+          <span class="off">On</span>
+          {{/if}}
+        </li>
+        <li class="action-delete">Delete</li>
+      </ul>
+    </div>
+  </div>
+</div>

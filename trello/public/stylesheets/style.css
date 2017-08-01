@@ -1,0 +1,743 @@
+@import 'reset.css';
+
+body {
+  font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
+}
+
+header {
+  background: #026AA7;
+  overflow: hidden;
+  padding: 10px 20px 10px 0;
+  z-index: 10;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  position: relative;
+}
+
+header a {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  display: inline-block;
+  width: 50px;
+}
+
+.boards {
+  width: 33%;
+  box-sizing: border-box;
+}
+
+.boards > a {
+  color: #fff;
+  font-weight: 500;
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  padding: 10px 10px 50px 10px;
+  margin: 10px 0;
+  background-color: rgb(0, 121, 191);
+  background-size: cover;
+  background-position: center center;
+  text-decoration: none;
+}
+
+.board {
+  background-color: rgb(0, 121, 191);
+  width: 100%;
+  height: 100vh;
+}
+
+.list-wrapper {
+  float: left;
+  width: 270px;
+  margin: 0 5px;
+  padding: 10px 0;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.placeholder {
+  display: inline-block;
+  box-sizing: border-box;
+  font-family: Helvetica;
+  width: 100%;
+  padding: 10px 0 10px 10px;
+  color: rgba(255,255,255,.7);
+  background: rgba(0,0,0,.08);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.placeholder:hover {
+  background: rgba(0,0,0,.18);
+}
+
+.add-input {
+  display: none;
+  box-sizing: border-box;
+  background-color: #E2E4E6;
+  padding: 5px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.add-input [type=text] {
+  display: block;
+  width: 95%;
+  height: 20px;
+  padding: 5px;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-family: Helvetica;
+  background: transparent;
+  box-shadow: inset 0 0 1px #000000;
+}
+
+.submit-button {
+  display: inline-block;
+  color: #fff;
+  background: linear-gradient(to bottom,#61BD4F 0,#5AAC44 100%);
+  border-width: 0;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.icon-cross {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  top: 5px;
+  position: relative;
+}
+
+.icon-cross:before, .icon-cross:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  background: #999;
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+
+.icon-cross:before {
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  height: 100%;
+}
+
+.icon-cross:after {
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  width: 100%;
+}
+
+.icon-cross:hover:before, .icon-cross:hover:after {
+  background: #444;
+}
+
+.list {
+  background: #E2E4E6;
+  border-radius: 3px;
+  margin-top: 10px;
+  padding: 10px 5px;
+}
+
+.list-title {
+  box-sizing: border-box;
+  font: bold 12px Helvetica;
+  color: black;
+  width: 100%;
+  height: 30px;
+  padding: 8px 5px;
+  background: #E2E4E6;
+  border-style: none;
+  text-decoration: none;
+  resize: none;
+}
+
+.list-title:focus {
+  background: #fff;
+}
+
+.new-card-title {
+  display: block;
+  box-sizing: border-box;
+  font-size: 14px;
+  width: 100%;
+  height: 54px;
+  margin-bottom: 10px;
+  padding: 10px;
+  word-wrap: break-word;
+  resize: none;
+  border-radius: 3px;
+  border: none;
+}
+
+.open-card-composer {
+  display: block;
+  text-decoration: none;
+  padding: 5px;
+  color: #8c8c8c;
+}
+
+.open-card-composer:hover {
+  text-decoration: underline;
+  background: rgba(0,0,0,.1);
+}
+
+.cc-controls-section {
+  display: none;
+}
+
+.list-cards {
+  min-height: 10px;
+}
+
+.list-card {
+  box-sizing: border-box;
+  color: #4d4d4d;
+  margin: 0 4px 10px 4px;
+  padding: 8px 8px;
+  border-radius: 3px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.list-card:hover {
+  /*#EDEFF0;*/
+  background-color: #EDEFF0;
+  cursor: pointer;
+}
+
+.card-labels {
+  margin: 2px 0;
+  overflow: auto;
+}
+
+.card-labels span {
+  float: left;
+  height: 8px;
+  margin: 0 3px 3px 0;
+  padding: 0;
+  width: 42px;
+  line-height: 75pt;
+  border-radius: 3px;
+  background-size: auto;
+}
+
+.card-labels span.red {
+  background: url(/images/red.png);
+}
+
+.card-labels span.yellow {
+  background: url(/images/yellow.png);
+}
+
+.card-labels span.orange {
+  background: url(/images/orange.png);
+}
+
+.edit-card {
+  display: none;
+  float: right;
+  position: relative;
+  top: -3px;
+  width: 21px;
+  height: 21px;
+  background-image: url('/images/pencil-light.png');
+  background-size: contain;
+}
+
+.selecting {
+  background-image: url('/images/pencil-dark.png');
+}
+
+.tilt {
+  transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -webkit-transform: rotate(3deg);
+}
+.sortableholder {
+  background-color: #444;
+  box-sizing: border-box;
+  border-radius: 3px;
+  width: 97%;
+  height: 33px;
+  margin: 0 4px 10px 4px;
+  padding: 5px 8px;
+  border-radius: 3px;
+}
+
+#modal-layer {
+  position: fixed;
+  background: rgba(0, 0, 0, .6);
+  top:0 ;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+}
+
+#card-modal {
+  position: absolute;
+  box-sizing: border-box;
+  background-color: #EDEFF0;
+  color: #4d4d4d;
+  border-radius: 3px;
+  width: 730px;
+  left: 50%;
+  margin-left: -365px;
+  min-height: 600px;
+  padding: 15px 15px;
+  z-index: 25;
+}
+
+.modal-icon {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  background-image: url(/images/card-icon.png);
+  background-size: contain;
+}
+
+.modal-title {
+  box-sizing: border-box;
+  font: bold 16px Helvetica;
+  color: #4d4d4d;
+  width: 80%;
+  height: 28px;
+  padding: 6px 6px;
+  background: #EDEFF0;
+  border-style: none;
+  text-decoration: none;
+  resize: none;
+}
+
+.modal-title:focus {
+  background-color: #fff;
+  outline-width: 0
+}
+
+.modal-header-content {
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+.modal-detail {
+  margin-left: 40px;
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+.modal-detail h3 {
+  margin-bottom: 5px;
+  font-weight: 400;
+  vertical-align: top;
+}
+
+.modal-labels {
+  display: inline-block;
+}
+
+.modal-labels li {
+  display: inline-block;
+  margin-right: 7px;
+}
+
+.modal-labels img {
+  width: 30px;
+  height: 30px;
+}
+
+.modal-dueDate {
+  top: -10px;
+  position: relative;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.modal-dueDate p {
+  display: block;
+  color: #fff;
+  background-color: #EC9488;;
+  padding: 5px 5px;
+  text-decoration: underline;
+}
+
+.new-card-title::placeholder {
+  color: #CDD2D4;
+}
+
+.modal-description a {
+  display: block;
+  text-decoration: underline;
+  padding: 10px 5px;
+  margin: 10px 0 0 0;
+}
+
+.modal-description a:hover {
+  background-color: rgba(0, 0, 0, .08);
+}
+
+.description-control-section {
+  display: none;
+}
+
+.modal-description h3 {
+  display: inline-block;
+}
+
+.description-control-section .icon-cross {
+  display: inline-block;
+  padding: 0;
+  margin: 0 0 0 8px;
+}
+
+.description-show a {
+  display: inline-block;
+  margin: 0 0 0 8px;
+  padding: 0;
+}
+
+.modal-main {
+  float: left;
+  width: 73%;
+}
+
+.modal-sidebar {
+  float: right;
+  width: 23%;
+}
+
+.modal-sidebar h2 {
+  font-size: 16px;
+}
+
+.modal-sidebar li {
+    background: linear-gradient(to bottom,#fff 0,#F8F9F9 100%);
+    box-sizing: border-box;
+    border: 1px solid #E2E4E6;
+    border-bottom-color: #CDD2D4;
+    cursor: pointer;
+    display: block;
+    font-weight: 700;
+    height: 34px;
+    margin-top: 6px;
+    max-width: 300px;
+    overflow: hidden;
+    padding: 7px;
+    position: relative;
+    text-overflow: ellipsis;
+    user-select: none;
+    white-space: nowrap;
+}
+.modal-sidebar li:hover {
+  background: #298FCA;
+  border-color: #298FCA #298FCA #026AA7;
+  color: #fff;
+}
+
+.modal-sidebar ul {
+  position: relative;
+}
+
+.show-labels {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  top: 40px;
+  padding: 10px;
+  z-index: 40;
+}
+
+.modal-sidebar h4 {
+  padding-bottom: 10px;
+  color: #8c8c8c;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #D6DADC;
+}
+
+.show-labels a {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#date-picker {
+  box-sizing: border-box;
+  background: #fff;
+  width: 260px;
+  padding: 10px 5px;
+}
+
+#date-picker h4 {
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #D6DADC;
+}
+
+#date-picker dl {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 49%;
+  padding: 8px 0 0 8px;
+}
+
+#date-picker dt {
+  padding-bottom: 5px;
+}
+
+#date-picker dd input {
+  box-sizing: border-box;
+  width: 85%;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#ui-datepicker-div {
+  box-sizing: border-box;
+  width: 260px;
+  background: #fff;
+}
+
+.ui-datepicker-inline a:hover {
+  cursor: pointer;
+}
+
+.ui-datepicker-prev {
+  float: left;
+  padding-left: 10px;
+}
+
+.ui-datepicker-next {
+  float: right;
+  padding-right: 10px;
+}
+
+.ui-datepicker-title {
+  width: 180px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ui-datepicker-inline td {
+  box-sizing: border-box;
+  padding: 2px 9px;
+}
+
+.ui-datepicker-header {
+  margin-bottom: 10px;
+}
+
+.picker-console {
+  margin-bottom: 10px;
+  padding: 0 5px;
+  overflow: hidden;
+}
+
+#date-picker input[value=Save] {
+  float: left;
+  padding: 8px 24px;
+}
+
+#date-picker input[value=Remove] {
+  float: right;
+  background: linear-gradient(to bottom,#D6DADC 0,#CDD2D4 100%);
+  color: #B04632;
+}
+
+.card-dueDate span {
+  display: inline-block;
+  color: #fff;
+  font-size: 12px;
+  background-color: #EC9488;
+  padding: 4px 5px;
+  border-radius: 5px;
+}
+
+.modal-comment-icon {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  background-image: url(/images/comments.png);
+  background-size: contain;
+}
+
+.modal-comments h3 {
+  display: inline-block;
+  position: relative;
+  top: -8px;
+}
+
+.modal-comments textarea {
+  display: block;
+  box-sizing: border-box;
+  font-size: 14px;
+  height: 54px;
+  width: 80%;
+  margin: 0 0 10px 35px;
+  padding: 10px;
+  word-wrap: break-word;
+  resize: none;
+  border-radius: 3px;
+  border: none;
+}
+
+.modal-comments input {
+  margin-left: 35px;
+}
+
+.modal-activities {
+  margin-top: 20px;
+}
+
+.modal-activities-icon {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  background-image: url(/images/activities.png);
+  background-size: contain;
+}
+
+.modal-activities h3 {
+  display: inline-block;
+  position: relative;
+  top: -8px;
+}
+
+.modal-activities div {
+  margin-left: 35px;
+}
+
+.modal-activities p {
+  background: #fff;
+  padding: 8px 5px;
+  margin-bottom: 5px;
+}
+
+.modal-actions {
+  margin-top: 30px;
+}
+
+.modal-move, .modal-copy {
+  box-sizing: border-box;
+  background: #fff;
+  width: 260px;
+  padding: 10px 5px;
+}
+
+.modal-actions dl {
+  display: inline-block;
+}
+
+.modal-actions dt {
+  padding-bottom: 5px;
+}
+
+.modal-actions label {
+  color: #8c8c8c;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.modal-actions input {
+  padding: 8px 5px;
+  font-size: 16px;
+}
+
+.modal-move dl ~ dl {
+  margin-left: 20px;
+}
+
+#listMoved {
+  width: 150px;
+}
+
+#positionMoved {
+  width: 50px;
+}
+
+.modal-actions .submit-button {
+  margin-top: 10px;
+}
+
+.modal-copy h5 {
+  margin: 10px 0;
+}
+
+.action-subscribe span {
+  float: right;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.action-subscribe span.on {
+  background: linear-gradient(to bottom,#61BD4F 0,#5AAC44 100%);
+}
+
+.action-subscribe span.off {
+  background: #8c8c8c;
+}
+
+.card-subscription {
+  float: left;
+  font-size: 10px;
+  padding-right: 10px;
+  color: #8c8c4c;
+}
+
+.top-bar {
+  float: right;
+  color: #fff;
+  font-weight: 600;
+  background: rgba(0,0,0,.15);
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.top-bar:hover {
+  cursor: pointer;
+  background: rgba(0,0,0,.25);
+}
+
+.notifications-console {
+  position: fixed;
+  box-sizing: border-box;
+  width: 400px;
+  padding: 0 10px;
+  background: #E2E4E6;
+  top: 55px;
+  right: 0;
+  border-radius: 5px;
+  z-index: 24;
+}
+
+.notifications-console h3 {
+  color: #8c8c8c;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  padding: 10px 0;
+  border-bottom: 0.4px solid #8c8c8c;
+}
+
+.notifications-console ul {
+  margin-top: 10px;
+}
+
+.notifications-console li {
+  color: #8c8c8c;
+  padding: 5px 0;
+}

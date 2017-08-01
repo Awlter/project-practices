@@ -1,0 +1,28 @@
+{{#if labels.length}}
+  <div class="card-labels">
+    {{#each labels}}
+      <span class="{{this}}"></span>
+    {{/each}}
+  </div>
+{{else}}
+  <div class="card-labels" style="display: none;">
+  </div>
+{{/if}}
+<span class="card-title">{{title}}</span>
+<span class="edit-card"></span>
+<div>
+  {{#if subscribed}}
+  <span class="card-subscription">watching</span>
+  {{else}}
+  <span class="card-subscription" style="display: none">watching</span>
+  {{/if}}
+  {{#if dueDate}}
+    <div class="card-dueDate">
+      <span>{{dueDate}}</span>
+    </div>
+  {{else}}
+    <div class="card-dueDate" style="display: none;">
+      <span></span>
+    </div>
+  {{/if}}
+</div>

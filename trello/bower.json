@@ -1,0 +1,23 @@
+{
+  "name": "trello",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Walter <wxfwalter@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Awlter/LaunchSchool_Walter",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "backbone": "^1.3.3",
+    "handlebars": "^4.0.10",
+    "jquery-ui": "^1.12.1"
+  }
+}
