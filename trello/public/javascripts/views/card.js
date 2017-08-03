@@ -60,7 +60,6 @@ var CardView = Backbone.View.extend({
   },
   updateSubscription: function() {
     var watching = this.$('.card-subscription');
-    console.log('hehe');
 
     if(this.model.get('subscribed')) {
       watching.show();

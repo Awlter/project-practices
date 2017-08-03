@@ -14,6 +14,8 @@ var NewListView = Backbone.View.extend({
   hideInput: function() {
     this.$('.add-input').hide();
     this.$('.placeholder').fadeIn();
+
+    this.el.reset();
   },
   addNewList: function(e) {
     e.preventDefault();
@@ -33,6 +35,5 @@ var NewListView = Backbone.View.extend({
     })
 
     this.hideInput();
-    this.el.reset();
   }
 })

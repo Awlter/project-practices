@@ -45,6 +45,7 @@ App = {
     var cardIdsPart1 = cardIds.slice(0, +data.toPosition - 1);
     cardIdsPart1.push(data.cardId);
     var cardIdsPart2 = cardIds.slice(+data.toPosition - 1);
+
     return cardIdsPart1.concat(cardIdsPart2);
   },
   updatePreListCardIds: function(data) {
@@ -54,7 +55,6 @@ App = {
     var preCardIds = _.without(cardIds, data.cardId);
 
     list.set('cardIds', preCardIds);
-    console.log(preCardIds);
     this.syncCardIds(+data.listId, preCardIds);
   },
   updateToListCardIds: function(data) {
@@ -62,8 +62,6 @@ App = {
     var toCardIds = this.toCardIdsPosition(data);
 
     list.set('cardIds', toCardIds);
-
-    console.log(toCardIds);
     this.syncCardIds(+data.toListId, toCardIds);
   },
   updateCardListId: function(data) {

@@ -1,0 +1,12 @@
+{{#if results.length}}
+<p>Results:</p>
+<ul>
+  {{#each results}}
+  <li>
+    <a data-searchid="{{this.id}}">{{this.title}}</a>
+    <span>{{this.description}}<span>
+  </li>
+  {{/each}}
+{{else}}
+  <p>No matching results</p>
+{{/if}}

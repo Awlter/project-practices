@@ -20,12 +20,9 @@ var ListView = Backbone.View.extend({
     var toPosition = cardIds.indexOf(cardId) + 1;
     var listId = App.cards.get(cardId).get('listId');
 
-    console.log(toListId, toPosition, listId, cardIds);
-
     App.trigger('moveCard', {toListId: toListId, toPosition: toPosition, listId: listId, cardId: cardId});
 
     App.trigger('updateCardListId', {id: cardId, listId: toListId})
-
     $.ajax({
       url: '/cardListId',
       type: 'post',
@@ -49,13 +46,11 @@ var ListView = Backbone.View.extend({
 
         //why ui.item.closest('.list').data('listid') and listId can be undefined?
         if (!listId) { return false;}
-
         if (ui.item.closest('.list').data('listid') === listId) {
           self.updateCardIds(this, ui.item.data('id'));
         }
       },
       receive: function(event, ui) {
-
         self.updateCardIds(this, ui.item.data('id'));
       }
     });

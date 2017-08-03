@@ -1,24 +1,31 @@
 var ModalView = Backbone.View.extend({
   template: App.templates.modal,
   events: {
-    'click .show-labels': 'showLabels',
     'click #modal-layer': 'hideModal',
     'blur .modal-title': 'changeTitle',
+    // description
     'click .add-description': 'showDescriptionControl',
     'click .edit-description': 'showDescriptionExistedControl',
     'click .icon-cross': 'closeDescriptionControl',
     'click .description-control-section .submit-button': 'updateDescription',
+    // comments
     'click .modal-comments input': 'addComment',
+    // labels
     'click .labels': 'toggleLabels',
     'click .show-labels a': 'selectLabel',
+    // due date
     'click .show-dueDate': 'toggleDueDate',
     'click .picker-console [value=Save]': 'updateDueDate',
     'click .picker-console [value=Remove]': 'removeDueDate',
+    // move
     'click .action-move': 'toggleActionMove',
     'click [value=Move]': 'moveCard',
+    // copy
     'click .action-copy': 'toggleActionCopy',
     'click [value=Copy]': 'copyCard',
+    // subscription
     'click .action-subscribe': 'changeSubscriptionState',
+    // delete
     'click .action-delete': 'deleteCard'
   },
   deleteCard: function() {
@@ -73,8 +80,7 @@ var ModalView = Backbone.View.extend({
       success: function(card) {
         App.trigger('copyCard', {card: card, toPosition: toPosition})
       }
-    })
-
+    });
   },
   toggleActionCopy: function() {
     this.$('.modal-copy').toggle();
@@ -97,12 +103,11 @@ var ModalView = Backbone.View.extend({
     var dueDate = this.model.get('dueDate');
 
     if (dueDate) {
+      $dueDateArea.find('p').html(dueDate);
       $dueDateArea.show();
     } else {
       $dueDateArea.hide();
     }
-
-    $dueDateArea.find('p').html(dueDate);
   },
   removeDueDate: function() {
     this.$('#date').val('');
@@ -124,8 +129,11 @@ var ModalView = Backbone.View.extend({
     })
 
     this.toggleDueDate();
-    var notification = `Card ${this.model.get('id')} updated due date to: ${dueDate}`;
-    App.trigger('addNotifiction', notification);
+
+    if (this.subscribed) {
+      var notification = `Card ${this.model.get('id')} updated due date to: ${dueDate}`;
+      App.trigger('addNotifiction', notification);
+    }
   },
   toggleDueDate: function() {
     this.$('#date-picker').toggle();
@@ -147,16 +155,18 @@ var ModalView = Backbone.View.extend({
       notification = `Card ${this.model.get('id')} deleted label: ${label}`
     }
 
-    App.trigger('addNotifiction', notification);
+    this.renderLabels();
 
     this.model.set('labels', this.labels);
-    this.renderLabels()
-
     $.ajax({
       url: "/labels",
       type: "post",
       data: {id: this.model.get('id'), labels: JSON.stringify(this.labels)}
     });
+
+    if (this.subscribed) {
+      App.trigger('addNotifiction', notification);
+    }
   },
   renderLabels: function() {
     var $labelsArea = this.$('.modal-labels');
@@ -180,17 +190,17 @@ var ModalView = Backbone.View.extend({
     var comment = $commentArea.val();
     var comments = this.model.get('comments');
     comments.unshift(comment);
-    this.model.set('comments', comments);
 
     this.$('.activity-list').prepend('<p>' + comment + '</p>');
 
-    $commentArea.val('');
-
+    this.model.set('comments', comments);
     $.ajax({
       url: '/comments',
       type: 'post',
       data: {id: this.model.get('id'), comments: JSON.stringify(this.model.get('comments'))}
-    })
+    });
+
+    $commentArea.val('');
 
     if (this.subscribed) {
       var notification = `Card ${this.model.get('id')} added comment: "${comment}"`
@@ -201,9 +211,9 @@ var ModalView = Backbone.View.extend({
     e.preventDefault();
 
     var input = this.$(".description-input").val();
-    this.model.set('description', input);
     this.$(".description-show").find('p').html(input);
 
+    this.model.set('description', input);
     $.ajax({
       url: '/description',
       type: 'post',
@@ -212,6 +222,10 @@ var ModalView = Backbone.View.extend({
 
     this.closeDescriptionControl();
 
+    if(this.subscribed) {
+      var notification = `Card ${this.model.get('id')} updated description to: ${input}`;
+      App.trigger('addNotifiction', notification);
+    }
     var notification = `Card ${this.model.get('id')} updated description to: ${input}`;
     App.trigger('addNotifiction', notification);
   },
@@ -241,17 +255,21 @@ var ModalView = Backbone.View.extend({
     var newTitle = this.$('.modal-title').val();
     this.model.set('title', newTitle);
 
-    var notification = `Card ${this.model.get('id')} editted title to: ${newTitle}`;
-    App.trigger('addNotifiction', notification);
+    if (this.subscribed) {
+      var notification = `Card ${this.model.get('id')} editted title to: ${newTitle}`;
+      App.trigger('addNotifiction', notification);
+    }
   },
   hideModal: function() {
     this.remove();
   },
   render: function() {
-    var listId = this.model.get('listId')
+    var listId = this.model.get('listId');
     var listTitle = App.lists.get(+listId).get('title');
+
     var passToTemplate = this.model.toJSON();
     passToTemplate.listTitle = listTitle;
+
     this.$el.html(this.template(passToTemplate));
   },
   renderDatePicker: function () {

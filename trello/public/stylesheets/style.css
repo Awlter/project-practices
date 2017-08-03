@@ -5,20 +5,85 @@ body {
 }
 
 header {
+  position: relative;
   background: #026AA7;
-  overflow: hidden;
+  height: 30px;
   padding: 10px 20px 10px 0;
   z-index: 10;
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
-  position: relative;
 }
 
-header a {
+header > a {
   position: absolute;
   left: 50%;
   margin-left: -50px;
   display: inline-block;
   width: 50px;
+}
+
+.search-area {
+  position: relative;
+  color: #4d4d4d;
+}
+
+.search-area input {
+  background-color: rgba(255,255,255,.3);
+  border-radius: 3px;
+  border: none;
+  color: rgba(255,255,255,.5);
+  float: left;
+  font-size: 13px;
+  height: 30px;
+  margin: 0;
+  min-height: 30px;
+  padding-right: 30px;
+  padding-left: 8px;
+  margin-left: 10px;
+  line-height: 19px;
+  transition: width 1000ms;
+  width: 180px;
+  z-index: 1;
+}
+
+.search-area input:focus {
+  background-color: #fff;
+  box-shadow: none;
+  color: #4d4d4d;
+  padding-right: 54px;
+}
+
+.search-area div {
+  position: absolute;
+  width: 600px;
+  top: 33px;
+  left: 10px;
+  min-height: 30px;
+  padding: 5px;
+  background-color: #EDEFF0;
+  border-radius: 5px;
+}
+
+.search-area div p {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.search-area div p:first-child {
+  text-align: center;
+}
+
+.search-area li {
+  margin: 5px 0 10px 10px;
+}
+
+.search-area li a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.search-area li span {
+  color: #8c8c8c;
+  margin-left: 10px;
 }
 
 .boards {

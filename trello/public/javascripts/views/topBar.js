@@ -7,7 +7,6 @@ var TopBarView = Backbone.View.extend({
   },
 
   toggleNotifications: function() {
-    console.log('hehe');
     $('.notifications-console').toggle()
   },
   render: function() {

@@ -127,6 +127,29 @@ this["JST"]["notifications"] = Handlebars.template({"1":function(container,depth
     + "</ul>";
 },"useData":true});
 
+this["JST"]["searchResults"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<p>Results:</p><ul>"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.results : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"2":function(container,depth0,helpers,partials,data) {
+    var alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "<li><a data-searchid=\""
+    + alias2(alias1((depth0 != null ? depth0.id : depth0), depth0))
+    + "\">"
+    + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
+    + "</a><span>"
+    + alias2(alias1((depth0 != null ? depth0.description : depth0), depth0))
+    + "<span></li>";
+},"4":function(container,depth0,helpers,partials,data) {
+    return "<p>No matching results</p>";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.results : depth0)) != null ? stack1.length : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "");
+},"useData":true});
+
 this["JST"]["topBar"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<ul><li><span class=\"top-notifications\">N</span></li></ul>";
 },"useData":true});
