@@ -78,6 +78,13 @@ module.exports = function(router, dataApi) {
       res.json(true);
     })
 
+  router.route('/cardtitle')
+    .post(function(req, res, next) {
+      // console.log(req.body.title, req.body.cardId);
+      cardsApi.updateTitle(req.body.title, req.body.cardId);
+      res.json(true);
+    })
+
   router.route('/listtitle/:listId')
     .post(function(req, res, next) {
       listsApi.updateTitle(req.body.title, req.body.listId);

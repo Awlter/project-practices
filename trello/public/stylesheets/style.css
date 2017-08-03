@@ -230,6 +230,13 @@ header > a {
   background: #fff;
 }
 
+.edit-input {
+  font-size: 14px;
+  color: #4c4c4c;
+  border-radius: 3px;
+  border: none;
+}
+
 .new-card-title {
   display: block;
   box-sizing: border-box;

@@ -9,7 +9,8 @@
   </div>
 {{/if}}
 <span class="card-title">{{title}}</span>
-<span class="edit-card"></span>
+<span class="edit-card" style="display: none"></span>
+<input class="edit-input" type="text" style="display: none" value="{{title}}"></input>
 <div>
   {{#if subscribed}}
   <span class="card-subscription">watching</span>

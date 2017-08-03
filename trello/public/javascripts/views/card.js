@@ -9,6 +9,8 @@ var CardView = Backbone.View.extend({
     "mouseleave .edit-card": "unselecting",
     "click .edit-card": "showEditArea",
     "click": "showCardDetail",
+    "click .edit-input": "updatingTitle",
+    "blur .edit-input": "updateInputTitle"
   },
   showCardDetail: function(e) {
     this.modal = new ModalView({model: this.model});
@@ -18,9 +20,23 @@ var CardView = Backbone.View.extend({
       top: $(window).scrollTop() + 50
     });
   },
+  hideEdit: function() {
+    this.$('.edit-input').hide();
+    this.$('.card-title').show();
+  },
+  updateInputTitle: function() {
+    var newTitle = this.$('.edit-input').val();
+    this.model.set('title', newTitle);
+
+    this.hideEdit();
+  },
+  updatingTitle: function(e) {
+    e.stopPropagation();
+  },
   showEditArea: function(e) {
     e.stopPropagation()
-    console.log('lol');
+    this.$('.edit-input').show();
+    this.$('.card-title').hide();
   },
   unselecting: function() {
     this.$editCard.removeClass('selecting');
@@ -35,7 +51,15 @@ var CardView = Backbone.View.extend({
     this.$editCard.hide();
   },
   updateTitle: function() {
-    this.$('.card-title').html(this.model.get('title'));
+    var title = this.model.get('title');
+    this.$('.card-title').html(title);
+    this.$('.edit-input').val(title);
+
+    $.ajax({
+      url: '/cardtitle',
+      type: 'post',
+      data: {title: title, cardId: this.model.get('id')}
+    });
   },
   updateLabels: function() {
     if (this.model.get('labels').length !== 0) {

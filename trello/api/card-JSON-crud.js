@@ -52,6 +52,10 @@ module.exports = {
     this.get(+id).listId = +listId;
     this.record();
   },
+  updateTitle: function(title, id) {
+    this.get(+id).title = title;
+    this.record();
+  },
   set: function set(input) {
     this.tempStore.lastId += 1;
     input.id = this.tempStore.lastId;
