@@ -1,0 +1,3 @@
+To test:
+- npm install
+- npm install -D underscore
